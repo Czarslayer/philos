@@ -33,6 +33,13 @@ void data_printer(t_def *def)
 	printf("number_of_philo_eat: %d\n", def->number_of_philo_eat);
 }
 
+double gettimeofdays(void)
+{
+	struct timeval tv;
+	gettimeofday(&tv, NULL);
+	return (tv.tv_sec * 1000 + tv.tv_usec / 1000);
+}
+
 
 
 int main(int argc, char **argv)
@@ -45,4 +52,6 @@ int main(int argc, char **argv)
 	def = (t_def *)calloc(1, sizeof(t_def));
 	data_init(&def, argv);
 	data_printer(def);
+	philos = (t_philo *)calloc(1, sizeof(t_philo) * def->number_philo);
+	printf("%.6f\n", gettimeofdays());
 }

@@ -1,25 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philosofers.h                                      :+:      :+:    :+:   */
+/*   philo_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mabahani <mabahani@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/13 22:21:42 by mabahani          #+#    #+#             */
-/*   Updated: 2023/03/17 14:30:22 by mabahani         ###   ########.fr       */
+/*   Created: 2023/03/17 18:01:50 by mabahani          #+#    #+#             */
+/*   Updated: 2023/03/17 19:36:54 by mabahani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILO_PHILOSOFERS_H
-#define PHILO_PHILOSOFERS_H
+#ifndef PHILO_BONUS_H
+# define PHILO_BONUS_H
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <pthread.h>
-#include <sys/time.h>
-#include <string.h>
-#include <semaphore.h>
+# include <pthread.h>
+# include <unistd.h>
+# include <stdlib.h>
+# include <stdio.h>
+# include <sys/time.h>
+# include <semaphore.h>
+# include <fcntl.h>
+# include <signal.h>
+
+# define FORK "has taken a fork"
+# define EAT "is eating"
+# define SLEEP "is sleeping"
+# define THINK "is thinking"
+# define DIE "died"
 
 typedef struct s_default {
 	long started;
@@ -30,22 +37,17 @@ typedef struct s_default {
 	int max_of_meals;
 }	t_default;
 
-typedef struct s_locks{
-	pthread_mutex_t *forks;
-	pthread_mutex_t print;
-	pthread_mutex_t *meals;
-	pthread_mutex_t last_meal_check;
-}	t_locks;
+typedef struct s_sems {
+	sem_t *forks;
+	sem_t *print;
+	sem_t *meals;
+	sem_t *last_meal_check;
+}	t_sems;
 
-typedef struct s_philo{
+typedef struct s_philo {
 	int id;
-	int number_of_meals;
+	int meals;
 	long last_meal;
-	pthread_t philo_thread;
-	pthread_mutex_t *left_fork;
-	pthread_mutex_t *right_fork;
-	t_default *general;
-	t_locks *mutixes;
 }	t_philo;
 
-#endif //PHILO_PHILOSOFERS_H
+#endif

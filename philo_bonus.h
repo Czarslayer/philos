@@ -21,6 +21,7 @@
 # include <semaphore.h>
 # include <fcntl.h>
 # include <signal.h>
+# include <sys/wait.h>
 
 # define FORK "has taken a fork"
 # define EAT "is eating"
